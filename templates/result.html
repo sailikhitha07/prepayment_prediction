@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .result-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .result-item {
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .result-item label {
+            font-weight: bold;
+            color: #555;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .result-item p {
+            margin: 0;
+            color: #333;
+            font-size: 16px;
+        }
+
+        /* Styling for the 'Go back' link */
+        .result-item a {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #006400;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 14px;
+            transition: background-color 0.3s ease;
+        }
+
+        .result-item a:hover {
+            background-color: #004d00;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 600px) {
+            .result-container {
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 20px;
+            }
+
+            .result-item p {
+                font-size: 14px;
+            }
+
+            .result-item a {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="result-container">
+        <h1>Prediction Results</h1>
+        
+        <div class="result-item">
+            <label for="classification-prediction">Classification Prediction:</label>
+            <p id="classification-prediction">
+                {% if classification_prediction == 1 %}
+                    The loan is predicted to be delinquent.
+                {% else %}
+                    The loan is predicted to be not delinquent.
+                {% endif %}
+            </p>
+        </div>
+        
+        <div class="result-item">
+            <label for="regression-prediction">Regression Prediction:</label>
+            <p id="regression-prediction">
+                {% if regression_prediction != 'N/A' %}
+                    The predicted amount is {{ regression_prediction }}.
+                {% else %}
+                    The regression prediction is not available (the loan is not predicted to be delinquent).
+                {% endif %}
+            </p>
+        </div>
+        
+        <div class="result-item">
+            <a href="{% url 'predictor' %}">Go back to input form</a>
+        </div>
+    </div>
+</body>
+</html>
